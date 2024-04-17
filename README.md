@@ -24,24 +24,38 @@ This is package based mono-repo with below structures:
 - Internal tooling started with **st** command. This is independent of nx cli as their api includes breaking changes between versions.  
 
 ## Getting started
-The project use redis and ollama on your local environment. To use these tools, need to install [Docker](https://docs.docker.com/engine/install/) and [Ollama](https://github.com/ollama/ollama) if you haven't done so.  
+
+### Infrastructure
+The project use redis and ollama on your local environment. To use these tools, need to install [Docker](https://docs.docker.com/engine/install/) and [Ollama](https://github.com/ollama/ollama) if you haven't done so. Also need to download `llama2` once you installed `Ollama`.  
 Then, start the database and ollama with below commands:  
 
 ``` sh
-pnpm start:redis
+pnpm start:infra
 ```
+
+### Backend
+For python application, we need to activate virtual environment before you run the application.  
 
 ``` sh
-pnpm start:ollama
+cd backend/apis/langchain-api
+source ./.venv/bin/activate
 ```
 
-Once those tools are running, start the app and backend api with:  
+
+If you just clone the application, will need to create `.env` file from `.env.sample` to run it locally. Then run the application with nx:  
 
 ``` sh
-pnpm dev
+nx run backend-apis-langchain-api:dev
 ```
 
-## Running tasks
+### Frontend
+If you just clone the application, will need to create `.env` file from `.env.sample` to run it locally.  
+
+``` sh
+nx run web:dev
+```
+
+## Running tasks with NX
 
 To execute tasks with Nx use the following syntax:
 

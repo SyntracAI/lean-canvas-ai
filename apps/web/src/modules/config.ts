@@ -2,8 +2,8 @@ import z from 'zod';
 
 export const configs = z
   .object({
-    NEXT_PUBLIC_SYNTRAC_ENDPOINT: z.string(),
-    NEXT_PUBLIC_SYNTRAC_KEY: z.string(),
+    NEXT_PUBLIC_SYNTRAC_ENDPOINT: z.string().nullish(),
+    NEXT_PUBLIC_SYNTRAC_KEY: z.string().nullish(),
     NEXT_PUBLIC_API_ENDPOINT: z.string(),
   })
   .parse({
