@@ -1,0 +1,19 @@
+{
+  "name": "@syntrac/tool-builder",
+  "description": "Builder helper for syntrac",
+  "version": "0.0.0",
+  "license": "MIT",
+  "main": "src/index.mjs",
+  "scripts": {},
+  "dependencies": {
+    "@syntrac/tool-cli-helper": "workspace:*",
+    "@pnpm/workspace.find-packages": "1.1.11",
+    "commander": "12.0.0",
+    "inquirer": "9.2.15",
+    "rollup": "4.13.0",
+    "typescript": "5.4.2"
+  },
+  "devDependencies": {
+    "typescript": "5.4.2"
+  }
+}

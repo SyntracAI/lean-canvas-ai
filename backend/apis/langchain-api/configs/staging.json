@@ -1,0 +1,8 @@
+{
+  "kafka": {
+    "secretArn": "arn:aws:secretsmanager:us-east-1:485405055019:secret:syntrac-kafka-staging-4mDywW",
+    "bootstrapServers": [
+      "hot-tetra-5605-us1-kafka.upstash.io:9092"
+    ]
+  }
+}

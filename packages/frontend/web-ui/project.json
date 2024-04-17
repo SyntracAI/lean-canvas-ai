@@ -1,0 +1,8 @@
+{
+  "name": "@syntrac/frontend-web-ui",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/frontend/web-ui",
+  "projectType": "package",
+  "targets": {},
+  "tags": []
+}

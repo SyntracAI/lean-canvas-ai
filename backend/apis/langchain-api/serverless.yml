@@ -1,0 +1,26 @@
+service: langchain-api
+
+frameworkVersion: '3'
+
+custom:
+  defaultStage: staging
+  currentStage: ${opt:stage, self:custom.defaultStage}
+  config: ${file(./configs/${self:custom.currentStage}.json)}
+
+provider:
+  name: aws
+  ecr:
+    images:
+      appimage:
+        path: ./
+        platform: linux/amd64
+        buildArgs:
+          stage: ${self:custom.currentStage}
+functions:
+  app:
+    timeout: 30
+    memorySize: 10240
+    image:
+      name: appimage
+    events:
+      - httpApi: "*"

@@ -1,0 +1,3 @@
+{
+  "extends": "./node_modules/@syntrac/rig-typescript-config/configs/react.json"
+}

@@ -1,0 +1,8 @@
+{
+  "kafka": {
+    "secretArn": "arn:aws:secretsmanager:us-east-1:403678982488:secret:syntrac-kafka-secret-jMoo4L",
+    "bootstrapServers": [
+      "one-krill-5310-us1-kafka.upstash.io:9092"
+    ]
+  }
+}

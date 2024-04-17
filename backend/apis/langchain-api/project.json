@@ -1,0 +1,81 @@
+{
+  "name": "backend-apis-langchain-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "backend/apis/langchain-api",
+  "projectType": "application",
+  "targets": {
+    "deploy": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "sls deploy --stage production",
+        "cwd": "backend/apis/langchain-api"
+      }
+    },
+    "deploy-staging": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "sls deploy --stage staging",
+        "cwd": "backend/apis/langchain-api"
+      }
+    },
+    "lock": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "poetry lock --no-update",
+        "cwd": "backend/apis/langchain-api"
+      }
+    },
+    "dev": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "uvicorn app.main:app --reload --port 8082",
+        "cwd": "backend/apis/langchain-api"
+      }
+    },
+    "add": {
+      "executor": "@nxlv/python:add",
+      "options": {}
+    },
+    "update": {
+      "executor": "@nxlv/python:update",
+      "options": {}
+    },
+    "remove": {
+      "executor": "@nxlv/python:remove",
+      "options": {}
+    },
+    "install": {
+      "executor": "@nxlv/python:install",
+      "options": {
+        "silent": false,
+        "args": "",
+        "cacheDir": ".cache/pypoetry",
+        "verbose": false,
+        "debug": false
+      }
+    },
+    "lint": {
+      "executor": "@nxlv/python:flake8",
+      "outputs": [
+        "{workspaceRoot}/reports/backend/apis/langchain-api/pylint.txt"
+      ],
+      "options": {
+        "outputFile": "reports/backend/apis/langchain-api/pylint.txt"
+      }
+    },
+    "test": {
+      "executor": "@nxlv/python:run-commands",
+      "outputs": [
+        "{workspaceRoot}/reports/backend/apis/langchain-api/unittests",
+        "{workspaceRoot}/coverage/backend/apis/langchain-api"
+      ],
+      "options": {
+        "command": "poetry run pytest tests/",
+        "cwd": "backend/apis/langchain-api"
+      }
+    }
+  },
+  "plugins": [
+  ],
+  "tags": []
+}

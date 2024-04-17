@@ -1,0 +1,10 @@
+{
+  "extends": "./node_modules/@syntrac/rig-typescript-config/configs/react.json",
+  "compilerOptions": {
+    "paths": {
+      "@/components": ["./src/components"],
+      "@/utils": ["./src/utils"],
+      "@/ui": ["./src/ui"]
+    }
+  }
+}

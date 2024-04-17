@@ -1,0 +1,49 @@
+{
+  "name": "@syntrac/frontend-shared-theme",
+  "version": "0.0.0",
+  "description": "Shared theme",
+  "main": "./dist/index.js",
+  "jsnext:main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "private": true,
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "st build ts package",
+    "build:watch": "st build ts package --watch",
+    "deploy": "zx ./scripts/deploy.mjs --experimental-json-modules ",
+    "test": "echo \"Error: no test specified\"",
+    "lint": "pnpm run lint:js",
+    "lint:js": "eslint --ext .ts --ext .tsx src/",
+    "lint:js:fix": "eslint --ext .ts --ext .tsx --cache --quiet --fix src/",
+    "fixcode": "pnpm run lint:js:fix",
+    "clean": "syntracrun env clean",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "colord": "2.9.3",
+    "prettier-plugin-tailwindcss": "0.5.12",
+    "remcalc": "1.0.10"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-config": "3.6.4",
+    "@syntrac/rig-eslint-config": "workspace:*",
+    "@syntrac/rig-prettier-config": "workspace:*",
+    "@syntrac/rig-rollup-config": "workspace:*",
+    "@syntrac/rig-typescript-config": "workspace:*",
+    "@syntrac/tool-cli": "workspace:*",
+    "@types/node": "20.10.5",
+    "@types/react": "18.2.60",
+    "eslint": "8.57.0",
+    "jest": "29.7.0",
+    "rollup": "4.13.0",
+    "rollup-plugin-copy": "3.4.0",
+    "typescript": "5.4.2",
+    "webpack": "5.90.3"
+  },
+  "author": "Vuong Ngo",
+  "license": "Apache-2.0"
+}
