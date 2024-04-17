@@ -15,6 +15,7 @@ from app.repos.canvas import CanvasTemplateRepo
 
 load_dotenv()
 
+# Initialize Syntrac on top of your app to capture telemetry automatically
 Syntrac.init(
   app_name="lean-canvas",
   )
@@ -35,6 +36,7 @@ app.add_middleware(
 
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
+    # Pass action_id to Syntrac for e2e analytics
     set_association_properties({
       "action_id": request.headers.get('x-action-id')
     })

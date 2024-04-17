@@ -23,6 +23,24 @@ This is package based mono-repo with below structures:
 ### Tools
 - Internal tooling started with **st** command. This is independent of nx cli as their api includes breaking changes between versions.  
 
+## Getting started
+The project use redis and ollama on your local environment. To use these tools, need to install [Docker](https://docs.docker.com/engine/install/) and [Ollama](https://github.com/ollama/ollama) if you haven't done so.  
+Then, start the database and ollama with below commands:  
+
+``` sh
+pnpm start:redis
+```
+
+``` sh
+pnpm start:ollama
+```
+
+Once those tools are running, start the app and backend api with:  
+
+``` sh
+pnpm dev
+```
+
 ## Running tasks
 
 To execute tasks with Nx use the following syntax:
@@ -45,8 +63,3 @@ nx run-many -t <target1> <target2> -p <proj1> <proj2>
 
 Targets can be defined in the `package.json` or `projects.json`. Learn more [in the docs](https://nx.dev/features/run-tasks).
 
-## Build monorepo docker
-
-``` sh
-docker build -t syntrac/shim
-```
