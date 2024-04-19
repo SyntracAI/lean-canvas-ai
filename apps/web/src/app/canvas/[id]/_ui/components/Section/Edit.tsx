@@ -36,24 +36,35 @@ export const Edit = ({ id, jsonKey, onClose }: EditProps) => {
   const queryClient = useQueryClient();
   const generate = useMutation({
     mutationFn: async (values: z.infer<typeof formSchema>) => {
-      const res = await syntracClient.track(
-        jsonKey,
-        async (_, headers) => {
-          return await fetch(
-            `${configs.NEXT_PUBLIC_API_ENDPOINT}/canvas/${id}/template/${jsonKey}`,
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                ...headers,
-              },
-              body: JSON.stringify(values),
-            },
-          );
+      /*
+         When user interact with AI, track their interaction with a task label
+         This will generate a unique action id which we need to send to backend
+         for correlation
+       */
+      const { headers, actionId } = syntracClient.track(jsonKey, {
+        domId: 'edit',
+      });
+      const res = await fetch(
+        `${configs.NEXT_PUBLIC_API_ENDPOINT}/canvas/${id}/template/${jsonKey}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...headers,
+          },
+          body: JSON.stringify(values),
         },
-        { domId: 'edit', domDelay: 300 },
       );
-      return await res.json();
+      return {
+        json: await res.json(),
+        actionId,
+      };
+    },
+    onSuccess: (data) => {
+      /*
+         Optional if you need to detect dom mutation
+      */
+      syntracClient.completeAction(data.actionId);
     },
   });
 

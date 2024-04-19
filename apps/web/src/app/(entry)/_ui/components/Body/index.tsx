@@ -37,23 +37,34 @@ export const Body = () => {
 
   const generate = useMutation({
     mutationFn: async (data: z.infer<typeof formSchema>) => {
-      const res = await syntracClient.track(TASK_NAME, async (_, headers) => {
-        return await fetch(`${configs.NEXT_PUBLIC_API_ENDPOINT}/generate`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...headers,
-          },
-          body: JSON.stringify(data),
-        });
+      /*
+         When user interact with AI, track their interaction with a task label
+         This will generate a unique action id which we need to send to backend
+         for correlation
+       */
+      const { headers, actionId } = syntracClient.track(TASK_NAME);
+      const res = await fetch(`${configs.NEXT_PUBLIC_API_ENDPOINT}/generate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers,
+        },
+        body: JSON.stringify(data),
       });
-      return await res.json();
+      return {
+        json: await res.json(),
+        actionId,
+      };
     },
     onSuccess: (data) => {
+      /*
+         Optional if you need to detect dom mutation
+      */
+      syntracClient.completeAction(data.actionId);
       setTimeout(() => {
         syntracClient.completeTask(TASK_NAME);
       }, 2000);
-      router.push(`/canvas/${data.id}`);
+      router.push(`/canvas/${data.json.id}`);
     },
   });
 
