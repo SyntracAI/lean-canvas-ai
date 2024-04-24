@@ -69,8 +69,8 @@ export const Edit = ({ id, jsonKey, onClose }: EditProps) => {
   });
 
   const { list, description } = useMemo(() => {
-    const isArray = Array.isArray(generate?.data?.[jsonKey]);
-    const value = generate?.data?.[jsonKey];
+    const isArray = Array.isArray(generate?.data?.json?.[jsonKey]);
+    const value = generate?.data?.json?.[jsonKey];
     return {
       list: isArray ? value : [],
       description: !isArray ? value : undefined,
@@ -88,7 +88,7 @@ export const Edit = ({ id, jsonKey, onClose }: EditProps) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            value: generate?.data?.[jsonKey],
+            value: generate?.data?.json?.[jsonKey],
           }),
         },
       );
